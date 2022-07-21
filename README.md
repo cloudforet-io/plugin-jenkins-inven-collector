@@ -1,0 +1,1 @@
+# plugin-jekins-inven-collector
