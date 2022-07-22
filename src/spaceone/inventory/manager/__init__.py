@@ -1,0 +1,1 @@
+from spaceone.inventory.manager.jenkins_manager import JenkinsManager
