@@ -37,7 +37,7 @@ setup(
         'schematics',
     ],
     package_data={
-        'spaceone': ['inventory/model/*/*/widget/*.yml']
+        'spaceone': ['inventory/model/*/widget/*.yml']
     },
     zip_safe=False,
 )
