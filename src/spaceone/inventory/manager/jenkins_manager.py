@@ -44,9 +44,9 @@ class JenkinsManager(CollectManager):
                 job_id = _job['url']
                 for build in _job.get('builds', []):
                     build_info = jenkins_conn.get_build_info(_job['name'], build.get('number'))
-                    build_info['job_url'] = job_id
-
                     build.update({
+                        'job_url': job_id,
+                        'job_name': _job.get('fullDisplayName', ''),
                         'result': build_info.get('result'),
                         'duration': build_info.get('duration'),
                         'queue_id': build_info.get('queueId')
