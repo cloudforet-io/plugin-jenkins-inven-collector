@@ -38,8 +38,11 @@ health_report_meta = ItemDynamicLayout.set_fields('Health Report', fields=[
 job = ListDynamicLayout.set_layouts('Job', layouts=[job_meta, build_summary_meta, health_report_meta])
 
 build = TableDynamicLayout.set_fields('Build', root_path='data.builds', fields=[
-    TextDyField.data_source('Number', 'number'),
-    TextDyField.data_source('Result', 'result'),
+    TextDyField.data_source('ID', 'display_name'),
+    EnumDyField.data_source('Result', 'result', default_state={
+        'safe': ['SUCCESS'],
+        'alert': ['FAILURE']
+    }),
     TextDyField.data_source('Duration', 'duration'),
     DateTimeDyField.data_source('Created At', 'created_at')
 ])

@@ -25,10 +25,12 @@ cst_job.tags = {
 
 cst_job._metadata = CloudServiceTypeMeta.set_meta(
     fields=[
-        TextDyField.data_source('ID', 'data.id'),
-        TextDyField.data_source('Name', 'data.full_display_name'),
-        EnumDyField.data_source('Result', 'data.result', default_badge={
-            'indigo.500': ['SUCCESS'], 'coral.600': ['FAILURE']
+        TextDyField.data_source('ID', 'data.id', options={
+            'is_optional': True
+        }),
+        EnumDyField.data_source('Result', 'data.result', default_state={
+            'safe': ['SUCCESS'],
+            'alert': ['FAILURE']
         }),
         TextDyField.data_source('Queue ID', 'data.queue_id', options={
             'is_optional': True
@@ -51,7 +53,15 @@ cst_job._metadata = CloudServiceTypeMeta.set_meta(
         TextDyField.data_source('Description', 'data.description', options={
             'is_optional': True
         }),
-        DateTimeDyField.data_source('Created At', 'data.created_at')
+        TextDyField.data_source('Job URL', 'data.job_url', options={
+            'is_optional': True
+        }),
+        TextDyField.data_source('Job Name', 'data.job_name', options={
+            'is_optional': True
+        }),
+        DateTimeDyField.data_source('Created At', 'data.created_at', options={
+            'is_optional': True
+        })
     ],
     search=[
         SearchField.set(name='ID', key='data.id'),

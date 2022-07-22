@@ -9,9 +9,12 @@ from spaceone.inventory.libs.schema.cloud_service import CloudServiceResource, C
 build_meta = ItemDynamicLayout.set_fields('Build', fields=[
     TextDyField.data_source('ID', 'data.id'),
     TextDyField.data_source('Name', 'data.full_display_name'),
-    EnumDyField.data_source('Result', 'data.result', default_badge={
-        'indigo.500': ['SUCCESS'], 'coral.600': ['FAILURE']
+    EnumDyField.data_source('Result', 'data.result', default_state={
+        'safe': ['SUCCESS'],
+        'alert': ['FAILURE']
     }),
+    TextDyField.data_source('Job Name', 'data.job_name'),
+    TextDyField.data_source('Job URL', 'data.job_url'),
     TextDyField.data_source('Queue ID', 'data.queue_id'),
     TextDyField.data_source('Duration', 'data.duration'),
     TextDyField.data_source('Estimated Duration', 'data.estimated_duration'),

@@ -19,6 +19,7 @@ class BuildChangeSet(Model):
 
 class Build(Model):
     job_url = StringType(serialize_when_none=False)
+    job_name = StringType(serialize_when_none=False)
     id = StringType(serialize_when_none=False)
     display_name = StringType(deserialize_from="displayName", serialize_when_none=False)
     full_display_name = StringType(deserialize_from="fullDisplayName", serialize_when_none=False)
@@ -40,6 +41,6 @@ class Build(Model):
 
     def reference(self):
         return {
-            "resource_id": self.job_url,
-            "external_link": self.job_url
+            "resource_id": self.url,
+            "external_link": self.url
         }
