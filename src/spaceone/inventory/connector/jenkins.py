@@ -37,4 +37,5 @@ class JenkinsConnector(BaseConnector):
     def get_build_info(self, job_name, build_number):
         return self.client.get_build_info(job_name, build_number)
 
-
+    def get_build_console_output(self, job_name, build_number):
+        return self.client.get_build_console_output(job_name, build_number)
