@@ -42,11 +42,13 @@ class JenkinsManager(CollectManager):
         for _job in jobs_info:
             try:
                 job_id = _job['url']
+
+                if _job.get('healthReport'):
+                    _job['health_report'] = _job['healthReport'][0]
+
                 for build in _job.get('builds', []):
                     build_info = jenkins_conn.get_build_info(_job['name'], build.get('number'))
                     build.update({
-                        'job_url': job_id,
-                        'job_name': _job.get('fullDisplayName', ''),
                         'result': build_info.get('result'),
                         'duration': build_info.get('duration'),
                         'queue_id': build_info.get('queueId')
@@ -55,6 +57,11 @@ class JenkinsManager(CollectManager):
                     if created_at := self.convert_timestamp_to_datetime(build_info.get('timestamp')):
                         build.update({'created_at': created_at})
                         build_info['created_at'] = created_at
+
+                    build_info.update({
+                        'job_url': job_id,
+                        'job_name': _job.get('fullDisplayName', ''),
+                    })
 
                     build_vos.append(Build(build_info, strict=False))
 

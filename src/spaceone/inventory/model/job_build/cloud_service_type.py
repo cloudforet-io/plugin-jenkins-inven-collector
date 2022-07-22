@@ -73,6 +73,8 @@ cst_job._metadata = CloudServiceTypeMeta.set_meta(
         SearchField.set(name='Keep Log', key='data.keep_log', data_type='boolean'),
         SearchField.set(name='URL', key='data.url'),
         SearchField.set(name='Description', key='data.description'),
+        SearchField.set(name='Job Name', key='data.job_name'),
+        SearchField.set(name='Job URL', key='data.job_url'),
         SearchField.set(name='Building', key='data.building', data_type='boolean'),
         SearchField.set(name='Created At', key='data.created_at', data_type='datetime')
     ],
