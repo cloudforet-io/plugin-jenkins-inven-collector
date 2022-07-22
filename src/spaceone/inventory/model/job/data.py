@@ -32,7 +32,7 @@ class Job(Model):
     first_build = ModelType(JobBuild, deserialize_from="firstBuild", serialize_when_none=False)
     full_display_name = StringType(deserialize_from="fullDisplayName", serialize_when_none=False)
     full_name = StringType(deserialize_from="fullName", serialize_when_none=False)
-    health_report = ListType(ModelType(HealthReport), deserialize_from="healthReport", default=[])
+    health_report = ModelType(HealthReport, serialize_when_none=False)
     in_queue = BooleanType(deserialize_from="inQueue", serialize_when_none=False)
     keep_dependencies = BooleanType(deserialize_from="keepDependencies", serialize_when_none=False)
     label_expression = BooleanType(deserialize_from="labelExpression", serialize_when_none=False)
