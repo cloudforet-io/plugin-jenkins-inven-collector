@@ -10,6 +10,7 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 total_count_conf = os.path.join(current_dir, 'widget/total_count.yml')
 count_by_server_conf = os.path.join(current_dir, 'widget/count_by_server.yml')
 count_by_job_conf = os.path.join(current_dir, 'widget/count_by_job.yml')
+count_by_result_conf = os.path.join(current_dir, 'widget/count_by_result.yml')
 
 
 cst_job = CloudServiceTypeResource()
@@ -82,7 +83,8 @@ cst_job._metadata = CloudServiceTypeMeta.set_meta(
     widget=[
         CardWidget.set(**get_data_from_yaml(total_count_conf)),
         ChartWidget.set(**get_data_from_yaml(count_by_server_conf)),
-        ChartWidget.set(**get_data_from_yaml(count_by_job_conf))
+        ChartWidget.set(**get_data_from_yaml(count_by_job_conf)),
+        ChartWidget.set(**get_data_from_yaml(count_by_result_conf))
     ]
 )
 
