@@ -48,10 +48,13 @@ class JenkinsManager(CollectManager):
 
                 for build in _job.get('builds', []):
                     build_info = jenkins_conn.get_build_info(_job['name'], build.get('number'))
+                    console_output = jenkins_conn.get_build_console_output(_job['name'], build.get('number'))
+
                     build.update({
                         'result': build_info.get('result'),
                         'duration': build_info.get('duration'),
-                        'queue_id': build_info.get('queueId')
+                        'queue_id': build_info.get('queueId'),
+                        'console_output': console_output
                     })
 
                     if created_at := self.convert_timestamp_to_datetime(build_info.get('timestamp')):
@@ -61,6 +64,7 @@ class JenkinsManager(CollectManager):
                     build_info.update({
                         'job_url': job_id,
                         'job_name': _job.get('fullDisplayName', ''),
+                        'console_output': console_output
                     })
 
                     build_vos.append(Build(build_info, strict=False))

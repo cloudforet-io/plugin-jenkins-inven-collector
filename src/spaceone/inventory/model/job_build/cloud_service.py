@@ -1,7 +1,7 @@
 from schematics.types import PolyModelType
 
 from spaceone.inventory.model.job_build.data import *
-from spaceone.inventory.libs.schema.metadata.dynamic_field import TextDyField, EnumDyField, DateTimeDyField
+from spaceone.inventory.libs.schema.metadata.dynamic_field import TextDyField, EnumDyField, DateTimeDyField, MoreField
 from spaceone.inventory.libs.schema.metadata.dynamic_layout import ItemDynamicLayout
 from spaceone.inventory.libs.schema.cloud_service import CloudServiceResource, CloudServiceResponse, CloudServiceMeta
 
@@ -15,6 +15,17 @@ build_meta = ItemDynamicLayout.set_fields('Build', fields=[
     }),
     TextDyField.data_source('Job Name', 'data.job_name'),
     TextDyField.data_source('Job URL', 'data.job_url'),
+    MoreField.data_source('Console Output', 'data.console_output', options={
+        'layout': {
+            'name': 'Console Output',
+            'type': 'popup',
+            'options': {
+                'layout': {
+                    'type': 'raw'
+                }
+            }
+        }
+    }),
     TextDyField.data_source('Queue ID', 'data.queue_id'),
     TextDyField.data_source('Duration', 'data.duration'),
     TextDyField.data_source('Estimated Duration', 'data.estimated_duration'),

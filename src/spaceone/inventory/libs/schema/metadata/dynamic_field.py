@@ -1,6 +1,6 @@
 import math
 from schematics import Model
-from schematics.types import ModelType, StringType, PolyModelType, DictType, BooleanType
+from schematics.types import ModelType, StringType, PolyModelType, DictType, BooleanType, BaseType
 from spaceone.inventory.libs.schema.metadata.dynamic_search import BaseDynamicSearch
 
 
@@ -95,6 +95,12 @@ class ProgressFieldOptions(FieldViewOption):
 class SizeFieldOptions(FieldViewOption):
     display_unit = StringType(serialize_when_none=False, choices=('BYTES', 'KB', 'MB', 'GB', 'TB', 'PB'))
     source_unit = StringType(serialize_when_none=False, choices=('BYTES', 'KB', 'MB', 'GB', 'TB', 'PB'))
+
+
+class MoreLayoutField(Model):
+    name = StringType(default='')
+    type = StringType(default="popup")
+    options = DictType(BaseType, serialize_when_none=False)
 
 
 class TextDyField(BaseDynamicField):
@@ -220,6 +226,11 @@ class DatetimeItemDyField(BaseField):
     @classmethod
     def set(cls, options):
         return cls({'options': DateTimeDyFieldOptions(options)})
+
+
+class MoreFieldOptions(FieldViewOption):
+    sub_key = StringType(serialize_when_none=False)
+    layout = PolyModelType(MoreLayoutField, serialize_when_none=False)
 
 
 class ListDyFieldOptions(FieldViewOption):
@@ -394,3 +405,17 @@ class SearchField(BaseDynamicSearch):
             })
 
         return cls(return_dic)
+
+
+class MoreField(BaseDynamicField):
+    type = StringType(default="more")
+    options = PolyModelType(MoreFieldOptions, serialize_when_none=False)
+
+    @classmethod
+    def data_source(cls, name, key, **kwargs):
+        _data_source = {'key': key, 'name': name}
+
+        if 'options' in kwargs:
+            _data_source.update({'options': kwargs.get('options')})
+
+        return cls(_data_source)

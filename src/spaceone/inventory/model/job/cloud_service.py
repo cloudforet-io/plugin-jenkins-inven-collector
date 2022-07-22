@@ -1,7 +1,7 @@
 from schematics.types import PolyModelType
 
 from spaceone.inventory.model.job.data import *
-from spaceone.inventory.libs.schema.metadata.dynamic_field import TextDyField, EnumDyField, DateTimeDyField
+from spaceone.inventory.libs.schema.metadata.dynamic_field import TextDyField, EnumDyField, DateTimeDyField, MoreField
 from spaceone.inventory.libs.schema.metadata.dynamic_layout import ItemDynamicLayout, TableDynamicLayout, ListDynamicLayout
 from spaceone.inventory.libs.schema.cloud_service import CloudServiceResource, CloudServiceResponse, CloudServiceMeta
 
@@ -44,7 +44,18 @@ build = TableDynamicLayout.set_fields('Build', root_path='data.builds', fields=[
         'alert': ['FAILURE']
     }),
     TextDyField.data_source('Duration', 'duration'),
-    DateTimeDyField.data_source('Created At', 'created_at')
+    DateTimeDyField.data_source('Created At', 'created_at'),
+    MoreField.data_source('Output', 'console_output', options={
+        'layout': {
+            'name': 'Console Output',
+            'type': 'popup',
+            'options': {
+                'layout': {
+                    'type': 'raw'
+                }
+            }
+        }
+    })
 ])
 
 
