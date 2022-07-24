@@ -17,6 +17,7 @@ class JobBuild(Model):
     queue_id = IntType(serialize_when_none=False)
     created_at = DateTimeType(serialize_when_none=False)
     console_output = StringType(serialize_when_none=False)
+    output_display = StringType(default="show")
 
 class Job(Model):
     name = StringType(serialize_when_none=False)

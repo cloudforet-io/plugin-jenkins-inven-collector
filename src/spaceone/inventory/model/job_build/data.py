@@ -38,6 +38,7 @@ class Build(Model):
     queue_id = StringType(deserialize_from="queueId", serialize_when_none=False)
     result = StringType(serialize_when_none=False)
     console_output = StringType(serialize_when_none=False)
+    output_display = StringType(default="show")
     created_at = DateTimeType(serialize_when_none=False)
 
     def reference(self):
