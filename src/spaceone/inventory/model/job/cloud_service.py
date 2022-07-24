@@ -45,11 +45,12 @@ build = TableDynamicLayout.set_fields('Build', root_path='data.builds', fields=[
     }),
     TextDyField.data_source('Duration', 'duration'),
     DateTimeDyField.data_source('Created At', 'created_at'),
-    MoreField.data_source('Output', 'console_output', options={
+    MoreField.data_source('Output', 'output_display', options={
         'layout': {
             'name': 'Console Output',
             'type': 'popup',
             'options': {
+                'sub_key': 'console_output',
                 'layout': {
                     'type': 'raw'
                 }

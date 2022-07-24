@@ -15,11 +15,12 @@ build_meta = ItemDynamicLayout.set_fields('Build', fields=[
     }),
     TextDyField.data_source('Job Name', 'data.job_name'),
     TextDyField.data_source('Job URL', 'data.job_url'),
-    MoreField.data_source('Console Output', 'data.console_output', options={
+    MoreField.data_source('Console Output', 'data.output_display', options={
         'layout': {
             'name': 'Console Output',
             'type': 'popup',
             'options': {
+                'sub_key': 'data.console_output',
                 'layout': {
                     'type': 'raw'
                 }
