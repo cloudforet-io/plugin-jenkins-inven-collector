@@ -8,8 +8,8 @@ _LOGGER = logging.getLogger(__name__)
 
 class JenkinsConnector(BaseConnector):
 
-    def __init__(self, **kwargs):
-        super().__init__(transaction=None, config=None)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         secret_data = kwargs.get('secret_data')
         endpoint = secret_data.get('endpoint')
